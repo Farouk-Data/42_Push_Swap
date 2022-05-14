@@ -17,9 +17,11 @@
 typedef struct s_stack
 {
 	int	*arr;
+	int	*positions;
 	int size;
 	int	id;
 	int	len;
+
 }	t_stack;
 
 void	ft_bzero(void *s, size_t n);
