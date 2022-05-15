@@ -7,21 +7,26 @@
 #include <stdarg.h>
 #include <limits.h>
 
-# define PUSHED 1
-# define NOT_PUSHED 0
+# define TRUE 1
+# define FALSE 0
 # define FOUND 0
 # define NOT_FOUND 1
 # define IN 1 
 # define OUT 0
 
+typedef struct s_node
+{
+	int	val;
+	int	pos;
+}	t_node;
+
 typedef struct s_stack
 {
 	int	*arr;
-	int	*positions;
 	int size;
 	int	id;
 	int	len;
-
+	t_node	*node;
 }	t_stack;
 
 void	ft_bzero(void *s, size_t n);
@@ -60,5 +65,6 @@ int		find_min(int *arr, int size, int index);
 int		A_is_sorted(int	*arr, int size);
 void	sort_three_numbers(t_stack *stack);
 void	sort_small_algo(t_stack *st_a, t_stack *st_b);
+void	sort_big_algo1(t_stack *st_a, t_stack *st_b);
 
 #endif

@@ -37,6 +37,8 @@ int main(int argc, char **argv)
 		 	sort_three_numbers(stack_a);
 		else if (stack_a->size >= 4 && stack_a->size <= 10)
 			sort_small_algo(stack_a, stack_b);
+		else if (stack_a->size >= 11 && stack_a->size <= 100)
+			sort_big_algo1(stack_a, stack_b);
 
 		// for (int i = stack_a->id; i < stack_a->size; i++)
 		// 	printf("%d ",stack_a->arr[i]);
