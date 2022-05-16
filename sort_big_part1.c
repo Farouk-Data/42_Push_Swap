@@ -87,36 +87,90 @@ void	index_stack(t_stack *st_a)
 	//free tmp
 }
 
+void	get_chunk(t_stack *st_a, t_stack *st_b, int hold)
+{
+	int	i;
+	int	tmp;
+
+	i = st_a->id;
+	while (i < st_a->size)
+	{
+		if (st_a->index[i] < hold)
+		{
+			tmp = i;
+			if (st_a->id >= st_a->size - 1 / 2)
+			{
+				while (i != st_a->id)
+				{
+					reverse_rotate_stack(st_a, "rra\n");
+					i--;
+				}
+				push_to_b(st_a, st_b);
+				//get value and test it
+				if (st_a->index[tmp] > (hold - ((st_a->size/5)/2)))
+					rotate_stack(st_b, "rb\n");
+				i = st_a->id;
+			}
+			else if (st_a->id < st_a->size - 1 / 2)
+			{
+				while (i != st_a->id)
+				{
+					rotate_stack(st_a, "ra\n");
+					i--;
+				}
+				push_to_b(st_a, st_b);
+				//get value and test it 
+				if (st_a->index[tmp] < (hold - ((st_a->size/5)/2)))
+					rotate_stack(st_b, "rb\n");
+				i = st_a->id;
+			}
+		}
+		else
+			i++;
+	}
+}
+
 
 void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 {
+	int	i;
 	int	max;
 	int	hold;
 
 	index_stack(st_a);
-	hold = st_a->id;
-	while (st_a->id < st_a->size)
+	hold = st_a->size / 5;
+	while (hold <= st_a->size)
 	{
-		if (st_a->index[st_a->id] < 20)
-		{
-			if (st_a->id >= st_a->size - 1 / 2)
-			{
-				while (st_a->id != hold)
-					reverse_rotate_stack(st_a, "rra\n");
-				push_to_b(st_a, st_b);
-				hold = st_a->id;
-			}
-			if (st_a->id < st_a->size - 1 / 2)
-			{
-				while (st_a->id != hold)
-					rotate_stack(st_a, "ra\n");
-				push_to_b(st_a, st_b);
-				hold = st_a->id;
-			}
-		}
+		get_chunk(st_a, st_b, hold);
+		hold += st_a->size/5;
 	}
 	while (st_b->id < st_b->size)
 	{
 		max = find_max(st_b->arr, st_b->size, st_b->id);
+		if (max == 0)
+			push_to_a(st_a, st_b);
+		else if (max == 1)
+		{
+			swap_stack(st_b, "sb\n");
+			push_to_a(st_a, st_b);
+		}
+		else if (max >= (st_b->size - 1) / 2)
+		{
+			while (max != 0)
+			{
+				reverse_rotate_stack(st_b, "rrb\n");
+				max = find_max(st_b->arr, st_b->size, st_b->id);
+			}
+			push_to_a(st_a, st_b);
+		}
+		else if (max < (st_b->size - 1) / 2)
+		{
+			while (max != 0)
+			{
+				rotate_stack(st_b, "rb\n");
+				max = find_max(st_b->arr, st_b->size, st_b->id);
+			}
+			push_to_a(st_a, st_b);
+		}
 	}
 }
