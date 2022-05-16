@@ -1,49 +1,7 @@
 #include "push_swap.h"
 
-//changing storing values
-void	copy_stack(t_stack *stack)
-{
-	int	i;
-	int	j;
-	
-	i = 0;
-	j = 0;
-	while (i < stack->size && j < stack->size)
-	{
-		stack->node[i].val = stack->arr[j];
-		i++;
-		j++;
-	}
-}
-
-void	bubble_sort(t_stack *stack)
-{
-	int	i;
-	int	j;
-	int	swapped;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		j = 0;
-		swapped = FALSE;
-		while (j < size - i - 1)
-		{
-			if (stack->node[j].val > stack->node[j + 1].val)
-			{
-				ft_swap(&stack->node[j].val, &stack->node[j+1].val);
-				swapped = TRUE;
-			}
-			j++;
-		}
-		if (swapped == FALSE)
-			break ;
-		i++;
-	}
-}
-
 //modify
-int find_max(t_stack *stack)
+int find_max(int *arr, int size, int index)
 {
 	int	i;
 	int	max;
@@ -64,45 +22,101 @@ int find_max(t_stack *stack)
 	return (pos);
 }
 
-void	copy_from_to_stack(t_stack *st1, t_stack *st2)
+
+void	bubble_sort(int *arr, int size)
 {
 	int	i;
+	int	j;
+	int	swapped;
 
 	i = 0;
-	while (i < st1->size)
+	while (i < size - 1)
 	{
-		st2->node[i].val = st1->node[i].val;
+		j = 0;
+		swapped = FALSE;
+		while (j < size - i - 1)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				ft_swap(&arr[j], &arr[j + 1]);
+				swapped = TRUE;
+			}
+			j++;
+		}
+		if (swapped == FALSE)
+			break ;
 		i++;
 	}
 }
 
-//indexing an array from small to big
-void	index_stack(t_stack *stack)
+void	copy_stack(t_stack *st_a, t_stack *st_tmp)
 {
 	int	i;
-	int	j;
-	t_stack	*tmp;
-
-	tmp = (t_stack *)malloc(sizeof(t_stack));
-	copy_stack(stack);
-	copy_from_to_stack(stack, tmp);
-	bubble_sort(tmp);
+	
 	i = 0;
-	while (i < stack->size)
+	while (i < st_a->size)
+	{
+		st_tmp->arr[i] = st_a->arr[i];
+		i++;
+	}
+}
+
+void	index_stack(t_stack *st_a)
+{
+	int		i;
+	int		j;
+	t_stack	*st_tmp;
+
+	st_tmp = (t_stack *)malloc(sizeof(t_stack));
+	st_tmp->arr = (int *)malloc(sizeof(int) * st_a->size);
+	st_a->index = (int *)malloc(sizeof(int) * st_a->size);
+	copy_stack(st_a, st_tmp);
+	bubble_sort(st_tmp->arr, st_a->size);
+	i = 0;
+	while (i < st_a->size)
 	{
 		j = 0;
-		while (j < stack->size)
+		while (j < st_a->size)
 		{
-			if (tmp->node[i].val == stack->node[j].val)
-				stack->node[j].pos = i;
+			if (st_a->arr[i] == st_tmp->arr[j])
+				st_a->index[i] = j;
 			j++;
 		}
 		i++;
 	}
+	//free tmp
 }
 
 
 void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 {
-	;
+	int	max;
+	int	hold;
+
+	index_stack(st_a);
+	hold = st_a->id;
+	while (st_a->id < st_a->size)
+	{
+		if (st_a->index[st_a->id] < 20)
+		{
+			if (st_a->id >= st_a->size - 1 / 2)
+			{
+				while (st_a->id != hold)
+					reverse_rotate_stack(st_a, "rra\n");
+				push_to_b(st_a, st_b);
+				hold = st_a->id;
+			}
+			if (st_a->id < st_a->size - 1 / 2)
+			{
+				while (st_a->id != hold)
+					rotate_stack(st_a, "ra\n");
+				push_to_b(st_a, st_b);
+				hold = st_a->id;
+			}
+		}
+	}
+	while (st_b->id < st_b->size)
+	{
+		max = find_max(st_b->arr, st_b->size, st_b->id);
+	}
 }

@@ -14,19 +14,19 @@
 # define IN 1 
 # define OUT 0
 
-typedef struct s_node
-{
-	int	val;
-	int	pos;
-}	t_node;
+// typedef struct s_node
+// {
+// 	int	val;
+// 	int	pos;
+// }	t_node;
 
 typedef struct s_stack
 {
 	int	*arr;
+	int	*index;
 	int size;
 	int	id;
 	int	len;
-	t_node	*node;
 }	t_stack;
 
 void	ft_bzero(void *s, size_t n);

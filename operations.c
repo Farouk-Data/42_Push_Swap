@@ -21,6 +21,8 @@ void	ft_swap(int *a, int *b)
 void	swap_stack(t_stack *st, char *str)
 {
 	ft_swap(&(st->arr[st->id]), &(st->arr[st->id+1]));
+	if (st->index != NULL)
+		ft_swap(&(st->index[st->id]), &(st->index[st->id+1]));
 	ft_print(str);
 }
 
@@ -39,6 +41,8 @@ void	rotate_stack(t_stack *st, char *str)
 	while (i < st->size - 1)
 	{
 		ft_swap(&(st->arr[i]), &(st->arr[i + 1]));
+		if (st->index != NULL)
+			ft_swap(&(st->index[i]), &(st->index[i+1]));
 		i++;
 	}
 	ft_print(str);
@@ -69,6 +73,8 @@ void	reverse_rotate_stack(t_stack *st, char *str)
 	while (i > st->id)
 	{
 		ft_swap(&(st->arr[i]), &(st->arr[i - 1]));
+		if (st->index != NULL)
+			ft_swap(&(st->index[i]), &(st->index[i-1]));
 		i--;
 	}
 	ft_print(str);

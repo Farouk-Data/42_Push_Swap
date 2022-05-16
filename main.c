@@ -27,6 +27,7 @@ int main(int argc, char **argv)
 		stack_a->len = stack_a->size;
 		stack_b->size = stack_a->size;
 		stack_b->len = 0;
+		stack_b->index = NULL;
 		stack_b->arr = (int *)malloc(sizeof(int)*stack_b->size);
 		ft_bzero(stack_b->arr, stack_b->size);
 		stack_b->id = stack_b->size-1;
