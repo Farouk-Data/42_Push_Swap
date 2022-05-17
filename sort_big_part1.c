@@ -9,7 +9,7 @@ int find_max(int *arr, int size, int index)
 
 	i = index;
 	pos = 0;
-	max = arr[index];
+	max = arr[i];
 	while (i < size)
 	{
 		if (max < arr[i])
@@ -21,7 +21,6 @@ int find_max(int *arr, int size, int index)
 	}
 	return (pos);
 }
-
 
 void	bubble_sort(int *arr, int size)
 {
@@ -110,9 +109,9 @@ void	get_chunk(t_stack *st_a, t_stack *st_b, int hold)
 			push_to_b(st_a, st_b);
 			if (st_a->index[st_a->id - 1] < (hold - ((st_a->size/2) / 5)))
 			{
-				// if (st_a->index[st_a->id] > hold)
-				// 	rr_op(st_a, st_b);
-				// else 
+				if (st_a->index[st_a->id] > hold)
+					rr_op(st_a, st_b);
+				else 
 					rotate_stack(st_b, "rb\n");
 			}
 		}
@@ -126,6 +125,7 @@ void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 	int	i;
 	int	max;
 	int	hold;
+	int	tmp;
 
 	index_stack(st_a);
 	hold = st_a->size / 5;
@@ -135,18 +135,25 @@ void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 		hold += st_a->size/5;
 	}
 	//stack B
+	int k = st_b->id;
+	while (k < st_b->size)
+	{
+		printf("%d ", st_b->arr[k]);
+		k++;
+	}
 	while (st_b->id < st_b->size)
 	{
 		max = find_max(st_b->arr, st_b->size, st_b->id);
-		if (max == 0)
+		if (max == st_b->id)
 			push_to_a(st_a, st_b);
-		else if (max == 1)
+		else if (max == st_b->id + 1)
 		{
 			swap_stack(st_b, "sb\n");
 			push_to_a(st_a, st_b);
 		}
 		else if (max >= (st_b->size - 1) / 2)
 		{
+			tmp = st_b->id;
 			while (max != 0)
 			{
 				reverse_rotate_stack(st_b, "rrb\n");
@@ -156,6 +163,7 @@ void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 		}
 		else if (max < (st_b->size - 1) / 2)
 		{
+			tmp = st_b->id;
 			while (max != 0)
 			{
 				rotate_stack(st_b, "rb\n");
@@ -163,5 +171,12 @@ void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 			}
 			push_to_a(st_a, st_b);
 		}
+	}
+	printf("\n");
+	int m = st_a->id;
+	while (m < st_a->size)
+	{
+		printf("%d ", st_a->arr[m]);
+		m++;
 	}
 }

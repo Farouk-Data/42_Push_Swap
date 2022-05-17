@@ -45,23 +45,14 @@ void	rotate_stack(t_stack *st, char *str)
 			ft_swap(&(st->index[i]), &(st->index[i+1]));
 		i++;
 	}
-	ft_print(str);
+	if (str != NULL)
+		ft_print(str);
 }
 
 void	rr_op(t_stack *st_a, t_stack *st_b)
 {
-	int	i;
-	int	j;
-
-	i = st_a->id;
-	j = st_b->id;
-	while (i < st_a->size - 1 && j < st_b->size - 1)
-	{
-		ft_swap(&(st_a->arr[i]), &(st_a->arr[i + 1]));
-		ft_swap(&(st_b->arr[j]), &(st_b->arr[j + 1]));
-		i++;
-		j++;
-	}
+	rotate_stack(st_a, NULL);
+	rotate_stack(st_b, NULL);
 	ft_printf("rr\n");
 }
 
