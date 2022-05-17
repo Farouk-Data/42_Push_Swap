@@ -103,7 +103,7 @@ void push_to_b(t_stack *st_a, t_stack *st_b)
 
 void push_to_a(t_stack *st_a, t_stack *st_b)
 {	
-	if (st_a->id >= 0 && st_b->id <= st_b->size - 1)
+	if (st_a->id >= 0 && st_b->id <= st_b->size - 1 && st_b->id >= 0)
 	{
 		st_a->id--;
 		st_a->arr[st_a->id] = st_b->arr[st_b->id];

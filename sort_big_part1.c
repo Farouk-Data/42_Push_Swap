@@ -1,20 +1,20 @@
 #include "push_swap.h"
 
 //modify
-int find_max(int *arr, int size, int index)
+int find_max(t_stack *st)
 {
 	int	i;
 	int	max;
 	int	pos;
 
-	i = index;
+	i = st->id;
 	pos = 0;
-	max = arr[i];
-	while (i < size)
+	max = st->arr[i];
+	while (i < st->size)
 	{
-		if (max < arr[i])
+		if (max < st->arr[i])
 		{
-			max = arr[i];
+			max = st->arr[i];
 			pos = i;
 		}
 		i++;
@@ -125,7 +125,7 @@ void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 	int	i;
 	int	max;
 	int	hold;
-	int	tmp;
+	int	inter;
 
 	index_stack(st_a);
 	hold = st_a->size / 5;
@@ -135,15 +135,9 @@ void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 		hold += st_a->size/5;
 	}
 	//stack B
-	int k = st_b->id;
-	while (k < st_b->size)
-	{
-		printf("%d ", st_b->arr[k]);
-		k++;
-	}
 	while (st_b->id < st_b->size)
 	{
-		max = find_max(st_b->arr, st_b->size, st_b->id);
+		max = find_max(st_b);
 		if (max == st_b->id)
 			push_to_a(st_a, st_b);
 		else if (max == st_b->id + 1)
@@ -151,32 +145,33 @@ void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 			swap_stack(st_b, "sb\n");
 			push_to_a(st_a, st_b);
 		}
-		else if (max >= (st_b->size - 1) / 2)
+		else if (max >= st_b->size / 2)
 		{
-			tmp = st_b->id;
 			while (max != 0)
 			{
 				reverse_rotate_stack(st_b, "rrb\n");
-				max = find_max(st_b->arr, st_b->size, st_b->id);
+				max = find_max(st_b);
 			}
 			push_to_a(st_a, st_b);
 		}
-		else if (max < (st_b->size - 1) / 2)
+		else if (max < st_b->size / 2)
 		{
-			tmp = st_b->id;
 			while (max != 0)
 			{
 				rotate_stack(st_b, "rb\n");
-				max = find_max(st_b->arr, st_b->size, st_b->id);
+				max = find_max(st_b);
 			}
 			push_to_a(st_a, st_b);
 		}
 	}
-	printf("\n");
-	int m = st_a->id;
-	while (m < st_a->size)
-	{
-		printf("%d ", st_a->arr[m]);
-		m++;
-	}
 }
+
+// while (max != st_b->arr[0])
+// 		{
+// 			if (max >= )
+// 				reverse_rotate_stack(st_b, "rrb\n");
+// 				rotate_stack(st_b, "rb\n");
+// 				max = find_max(st_b);
+// 			}
+// 			push_to_a(st_a, st_b);
+// 		}
