@@ -87,49 +87,39 @@ void	index_stack(t_stack *st_a)
 	//free tmp
 }
 
-void	get_chunk(t_stack *st_a, t_stack *st_b, int hold)
+int	find_number(t_stack *st_a, int hold, int index)
 {
 	int	i;
-	int	tmp;
+	int	check;
 
-	i = st_a->id;
+	i = index;
 	while (i < st_a->size)
 	{
 		if (st_a->index[i] < hold)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+void	get_chunk(t_stack *st_a, t_stack *st_b, int hold)
+{
+	while (find_number(st_a, hold, st_a->id))
+	{
+		if (st_a->index[st_a->id] < hold)
 		{
-			tmp = i;
-			if (st_a->id >= st_a->size - 1 / 2)
+			push_to_b(st_a, st_b);
+			if (st_a->index[st_a->id - 1] < (hold - ((st_a->size/2) / 5)))
 			{
-				while (i != st_a->id)
-				{
-					reverse_rotate_stack(st_a, "rra\n");
-					i--;
-				}
-				push_to_b(st_a, st_b);
-				//get value and test it
-				if (st_a->index[tmp] > (hold - ((st_a->size/5)/2)))
+				// if (st_a->index[st_a->id] > hold)
+				// 	rr_op(st_a, st_b);
+				// else 
 					rotate_stack(st_b, "rb\n");
-				i = st_a->id;
-			}
-			else if (st_a->id < st_a->size - 1 / 2)
-			{
-				while (i != st_a->id)
-				{
-					rotate_stack(st_a, "ra\n");
-					i--;
-				}
-				push_to_b(st_a, st_b);
-				//get value and test it 
-				if (st_a->index[tmp] < (hold - ((st_a->size/5)/2)))
-					rotate_stack(st_b, "rb\n");
-				i = st_a->id;
 			}
 		}
 		else
-			i++;
+			rotate_stack(st_a, "ra\n");
 	}
 }
-
 
 void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 {
@@ -144,6 +134,7 @@ void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 		get_chunk(st_a, st_b, hold);
 		hold += st_a->size/5;
 	}
+	//stack B
 	while (st_b->id < st_b->size)
 	{
 		max = find_max(st_b->arr, st_b->size, st_b->id);
