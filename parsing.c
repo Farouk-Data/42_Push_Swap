@@ -89,6 +89,7 @@ void	convert_args(char **args, t_stack *stack)
 	while (args[i] != NULL)
 	{
 		stack->element[i].val = ft_atoi(args[i]);
+		printf("%d ", stack->element[i].val);
 		i++;
 	}
 }
