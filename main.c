@@ -30,16 +30,23 @@ int main(int argc, char **argv)
 			ft_printf("Error\n");
 			return (0);
 		}
+		for (int i = 0; i < stack_a->size; i++)
+			printf("%d ", stack_a->element[i].val);
+		printf("\n");
 		if (A_is_sorted(stack_a, stack_a->size))
 		  	return (1);
-		// else if (stack_a->size == 3)
-		//  	sort_three_numbers(stack_a);
+		else if (stack_a->size == 3)
+		 	sort_three_numbers(stack_a);
 		// else if (stack_a->size >= 4 && stack_a->size <= 10)
 		// 	sort_small_algo(stack_a, stack_b);
 		// else if (stack_a->size >= 11 && stack_a->size <= 100)
 		// 	sort_big_algo1(stack_a, stack_b);
 		// else if (stack_a->size > 100 && stack_a->size <= 500)
 		// 	sort_big_algo2(stack_a, stack_b);
+		printf("\n");
+		for (int i = 0; i < stack_a->size; i++)
+			printf("%d ", stack_a->element[i].val);
+		printf("\n");
 	}
 	return (0);
 }

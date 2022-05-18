@@ -1,4 +1,4 @@
-// #include "push_swap.h"
+#include "push_swap.h"
 
 // int	find_min(int *arr, int size, int index)
 // {
@@ -21,27 +21,27 @@
 // 	return (pos);
 // }
 
-// void		sort_three_numbers(t_stack *stack)
-// {
-// 	if (stack->arr[stack->id] > stack->arr[stack->id+1] && stack->arr[stack->id] < stack->arr[stack->id+2])
-// 		swap_stack(stack, "sa\n");
-// 	else if (stack->arr[stack->id] > stack->arr[stack->id+1] && stack->arr[stack->id+1] > stack->arr[stack->id+2])
-// 	{
-// 		swap_stack(stack, "sa\n");
-// 		reverse_rotate_stack(stack, "rra\n");
-// 	}
-// 	else if (stack->arr[stack->id] > stack->arr[stack->id+2] && stack->arr[stack->id+1] < stack->arr[stack->id+2])
-// 		rotate_stack(stack, "ra\n");
-// 	else if (stack->arr[stack->id] < stack->arr[stack->id+1] && stack->arr[stack->id] > stack->arr[stack->id+2])
-// 	{
-// 		reverse_rotate_stack(stack, "rra\n");
-// 	}
-// 	else if (stack->arr[stack->id+2] > stack->arr[stack->id] && stack->arr[stack->id+2] < stack->arr[stack->id+1])
-// 	{
-// 		swap_stack(stack, "sa\n");
-// 		rotate_stack(stack, "ra\n");
-// 	}
-// }
+void		sort_three_numbers(t_stack *stack)
+{
+	if (stack->element[0].val > stack->element[1].val && stack->element[0].val < stack->element[2].val)
+		swap_stack(stack, "sa\n");
+	else if (stack->element[0].val > stack->element[1].val && stack->element[1].val > stack->element[2].val)
+	{
+		swap_stack(stack, "sa\n");
+		reverse_rotate_stack(stack, "rra\n");
+	}
+	else if (stack->element[0].val > stack->element[2].val && stack->element[1].val < stack->element[2].val)
+		rotate_stack(stack, "ra\n");
+	else if (stack->element[0].val < stack->element[1].val && stack->element[0].val > stack->element[2].val)
+	{
+		reverse_rotate_stack(stack, "rra\n");
+	}
+	else if (stack->element[2].val > stack->element[0].val && stack->element[2].val < stack->element[1].val)
+	{
+		swap_stack(stack, "sa\n");
+		rotate_stack(stack, "ra\n");
+	}
+}
 
 // void	sort_small_algo(t_stack *st_a, t_stack *st_b)
 // {
