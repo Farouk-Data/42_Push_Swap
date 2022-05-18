@@ -95,7 +95,8 @@ void push_to_b(t_stack *st_a, t_stack *st_b)
 	if (st_a->id < st_a->size && st_b->id >= 0)
 	{
 		st_b->arr[st_b->id] = st_a->arr[st_a->id];
-		st_a->id++;
+		if (st_a->id != st_a->size)
+			st_a->id++;
 		st_b->len++;
 		ft_printf("pb\n");
 	}
@@ -108,7 +109,8 @@ void push_to_a(t_stack *st_a, t_stack *st_b)
 		st_a->id--;
 		st_a->arr[st_a->id] = st_b->arr[st_b->id];
 		ft_printf("pa\n");
-		st_b->id++;
+		if (st_b->id != st_b->size )
+			st_b->id++;
 	}
 }
 

@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
 //modify
-int find_max(t_stack *st)
+int find_max2(t_stack *st)
 {
 	int	i;
 	int	max;
@@ -22,7 +22,7 @@ int find_max(t_stack *st)
 	return (pos);
 }
 
-void	bubble_sort(int *arr, int size)
+void	bubble_sort2(int *arr, int size)
 {
 	int	i;
 	int	j;
@@ -48,7 +48,7 @@ void	bubble_sort(int *arr, int size)
 	}
 }
 
-void	copy_stack(t_stack *st_a, t_stack *st_tmp)
+void	copy_stack2(t_stack *st_a, t_stack *st_tmp)
 {
 	int	i;
 	
@@ -60,7 +60,7 @@ void	copy_stack(t_stack *st_a, t_stack *st_tmp)
 	}
 }
 
-void	index_stack(t_stack *st_a)
+void	index_stack2(t_stack *st_a)
 {
 	int		i;
 	int		j;
@@ -69,8 +69,8 @@ void	index_stack(t_stack *st_a)
 	st_tmp = (t_stack *)malloc(sizeof(t_stack));
 	st_tmp->arr = (int *)malloc(sizeof(int) * st_a->size);
 	st_a->index = (int *)malloc(sizeof(int) * st_a->size);
-	copy_stack(st_a, st_tmp);
-	bubble_sort(st_tmp->arr, st_a->size);
+	copy_stack2(st_a, st_tmp);
+	bubble_sort2(st_tmp->arr, st_a->size);
 	i = 0;
 	while (i < st_a->size)
 	{
@@ -86,7 +86,7 @@ void	index_stack(t_stack *st_a)
 	//free tmp
 }
 
-int	find_number(t_stack *st_a, int hold, int index)
+int	find_number2(t_stack *st_a, int hold, int index)
 {
 	int	i;
 	int	check;
@@ -100,9 +100,9 @@ int	find_number(t_stack *st_a, int hold, int index)
 	}
 	return (0);
 }
-void	get_chunk(t_stack *st_a, t_stack *st_b, int hold)
+void	get_chunk2(t_stack *st_a, t_stack *st_b, int hold)
 {
-	while (find_number(st_a, hold, st_a->id))
+	while (find_number2(st_a, hold, st_a->id))
 	{
 		if (st_a->index[st_a->id] < hold)
 		{
@@ -126,24 +126,24 @@ void	get_chunk(t_stack *st_a, t_stack *st_b, int hold)
 // 	int	max_pos;
 // }
 
-void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
+void	sort_big_algo2(t_stack *st_a, t_stack *st_b)
 {
 	int	i;
 	int	max;
 	int	hold;
 
-	index_stack(st_a);
+	index_stack2(st_a);
 	hold = st_a->size / 5;
 	//printf("id a before: %d \nid b before: %d\n",st_a->id ,st_b->id);
 	while (hold <= st_a->size)
 	{
-		get_chunk(st_a, st_b, hold);
-		hold += st_a->size/5;
+		get_chunk2(st_a, st_b, hold);
+		hold += st_a->size/10;
 	}
 	//printf("id a before: %d \nid b before: %d\n",st_a->id ,st_b->id);
 	while (st_b->id < st_b->size)
 	{
-		max = find_max(st_b);
+		max = find_max2(st_b);
 		if (max == st_b->id)
 			push_to_a(st_a, st_b);
 		else if (max == st_b->id + 1)
@@ -156,17 +156,17 @@ void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 			while (max != 0)
 			{
 				reverse_rotate_stack(st_b, "rrb\n");
-				max = find_max(st_b);
+				max = find_max2(st_b);
 			}
 			push_to_a(st_a, st_b);
 		}
-		//max = find_max(st_b);
+		//max = find_max2(st_b);
 		else if (max < st_b->size / 2)
 		{
 			while (max != 0)
 			{
 				rotate_stack(st_b, "rb\n");
-				max = find_max(st_b);
+				max = find_max2(st_b);
 			}
 			push_to_a(st_a, st_b);
 		}

@@ -1,23 +1,15 @@
 #include "push_swap.h"
 
-void	ft_free(t_stack *stack_a)
+void	ft_bzero(t_stack *stack)
 {
-	free(stack_a->arr);
-	free(stack_a);
-}
+	int	i;
 
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned char	*tpc;
-
-	tpc = s;
-	if (n == 0)
-		return ;
-	while (n)
+	i = 0;
+	while (i < stack->size)
 	{
-		*tpc = 0;
-		tpc++;
-		n--;
+		stack->element[i].val = 0;
+		stack->element[i].pos = 0;
+		i++;
 	}
 }
 
@@ -87,17 +79,21 @@ void	convert_args(char **args, t_stack *stack)
 	i = 0;
 	while (args[i] != NULL)
 		i++;
-	stack->size = i; 
-	stack->arr = (int *)malloc(sizeof(int)*stack->size);
+	stack = (t_stack *)malloc(sizeof(t_stack));
+	stack->element = (t_node *)malloc(sizeof(t_node) * i);
+	if (stack == NULL)
+		return ;
+	stack->size = i;
+	stack->len = stack->size;
 	i = 0;
 	while (args[i] != NULL)
 	{
-		stack->arr[i] = ft_atoi(args[i]);
+		stack->element[i].val = ft_atoi(args[i]);
 		i++;
 	}
 }
 
-int check_dup(int *ar, int size)
+int check_dup(t_stack *stack)
 {
 	int	i;
 	int	j;
@@ -106,13 +102,13 @@ int check_dup(int *ar, int size)
 
 	i = 0;
 	duplicate = NOT_FOUND;
-	while (i < size)
+	while (i < stack->size)
 	{
 		j = i;
-		tmp = ar[i];
-		while (j < size - 1)
+		tmp = stack->element[i].val;
+		while (j < stack->size - 1)
 		{
-			if (tmp == ar[j + 1])
+			if (tmp == stack->element[j + 1].val)
 			{
 				duplicate = FOUND;
 				return (1);
@@ -125,11 +121,11 @@ int check_dup(int *ar, int size)
 	return (0);
 }
 
-int	A_is_sorted(int	*arr, int size)
+int	A_is_sorted(t_stack *stack, int size)
 {
 	if (size == 1 || size == 0)
 		return (1);
-	if (arr[size - 1] < arr[size - 2])
+	if (stack->element[size - 1].val < stack->element[size - 2].val)
 		return (0);
-	return A_is_sorted(arr, size - 1);
+	return A_is_sorted(stack, size - 1);
 }
