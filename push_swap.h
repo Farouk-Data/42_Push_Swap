@@ -40,7 +40,7 @@ int		ft_print_upper_hexa(unsigned int nb);
 int		ft_print_addrs(long unsigned int nb);
 size_t	ft_strlen(const char *s);
 void	convert_args(char **args, t_stack *stack);
-char	**read_args(int argc, char **argv);
+char	**read_args(int argc, char **argv, int *count);
 long 	int		ft_atoi(const char *str);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);

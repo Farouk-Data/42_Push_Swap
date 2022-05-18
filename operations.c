@@ -1,22 +1,22 @@
 #include "push_swap.h"
 
-// void	ft_print(char *str)
-// {
-// 	while (*str)
-// 	{
-// 		ft_putchar(*str);
-// 		str++;
-// 	}
-// }
+void	ft_print(char *str)
+{
+	while (*str)
+	{
+		ft_putchar(*str);
+		str++;
+	}
+}
 
-// void	ft_swap(int *a, int *b)
-// {
-// 	int	tmp;
+void	ft_swap(int *a, int *b)
+{
+	int	tmp;
 
-// 	tmp = *a;
-// 	*a = *b;
-// 	*b = tmp;
-// }
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
 
 // void	swap_stack(t_stack *st, char *str)
 // {

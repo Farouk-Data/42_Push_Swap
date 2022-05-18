@@ -41,7 +41,7 @@ int	check_arg(char *str)
 	return (1);
 }
 
-char	**read_args(int argc, char **argv)
+char	**read_args(int argc, char **argv, int *count)
 {
 	int		i;
 	char	*args;
@@ -69,6 +69,12 @@ char	**read_args(int argc, char **argv)
 			return (NULL);
 		i++;
 	}
+	i = 0;
+	while (arr_arg[i] != NULL)
+	{
+		*count = *count + 1;
+		i++;
+	}
 	return (arr_arg);
 }
 
@@ -77,19 +83,14 @@ void	convert_args(char **args, t_stack *stack)
 	int	i;
 
 	i = 0;
-	while (args[i] != NULL)
-		i++;
-	stack = (t_stack *)malloc(sizeof(t_stack));
-	stack->element = (t_node *)malloc(sizeof(t_node) * i);
+	
 	if (stack == NULL)
 		return ;
-	stack->size = i;
 	stack->len = stack->size;
 	i = 0;
 	while (args[i] != NULL)
 	{
 		stack->element[i].val = ft_atoi(args[i]);
-		printf("%d ", stack->element[i].val);
 		i++;
 	}
 }
