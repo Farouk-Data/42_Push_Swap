@@ -60,7 +60,7 @@ void	reverse_rotate_stack(t_stack *st, char *str);
 void	rrr_op(t_stack *st_a, t_stack *st_b);
 void	push_to_b(t_stack *st_a, t_stack *st_b);
 void	push_to_a(t_stack *st_a, t_stack *st_b);
-int		find_min(int *arr, int size, int index);
+int		find_min(t_stack *stack);
 int		A_is_sorted(t_stack *stack, int size);
 void	sort_three_numbers(t_stack *stack);
 void	sort_small_algo(t_stack *st_a, t_stack *st_b);
