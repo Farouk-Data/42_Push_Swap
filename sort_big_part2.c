@@ -30,7 +30,7 @@ void	sort_big_algo2(t_stack *st_a, t_stack *st_b)
 	chunk = st_a->size / 10;
 	while (chunk <= st_a->size)
 	{
-		get_chunk(st_a, st_b, chunk);
+		get_chunk2(st_a, st_b, chunk);
 		chunk += st_a->size/10;
 	}
 	while (st_b->len)
