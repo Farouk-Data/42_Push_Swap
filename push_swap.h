@@ -28,6 +28,13 @@ typedef struct s_stack
 	int		len;
 }	t_stack;
 
+void	bubble_sort(t_stack *stack);
+int		find_max(t_stack *stack);
+void	copy_stack(t_stack *st_a, t_stack *st_tmp);
+void	index_stack(t_stack *st_a);
+int		find_number(t_stack *st_a, int chunk);
+void	get_chunk(t_stack *st_a, t_stack *st_b, int chunk);
+void	get_chunk2(t_stack *st_a, t_stack *st_b, int chunk);
 void	ft_bzero(t_stack *stack);
 void	ft_print(char *str);
 int		ft_printf(const char *, ...);

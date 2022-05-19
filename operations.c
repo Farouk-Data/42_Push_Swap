@@ -30,6 +30,7 @@ void	ss_op(t_stack *st_a, t_stack *st_b)
 	ft_swap(&(st_a->element[0].val), &(st_a->element[1].val));
 	ft_swap(&(st_a->element[0].pos), &(st_a->element[1].pos));
 	ft_swap(&(st_b->element[0].val), &(st_b->element[1].val));
+	ft_swap(&(st_b->element[0].pos), &(st_b->element[1].pos));
 	ft_printf("ss\n");
 }
 
@@ -85,9 +86,11 @@ void push_to_b(t_stack *st_a, t_stack *st_b)
 	while (i > 0)
 	{
 		st_b->element[i].val = st_b->element[i - 1].val;
+		st_b->element[i].pos = st_b->element[i - 1].pos;
 		i--;
 	}
 	st_b->element[0].val = st_a->element[0].val;
+	st_b->element[0].pos = st_a->element[0].pos;
 	while (i < st_a->len)
 	{
 		st_a->element[i].val = st_a->element[i + 1].val;
@@ -111,9 +114,11 @@ void push_to_a(t_stack *st_a, t_stack *st_b)
 		i--;
 	}
 	st_a->element[0].val = st_b->element[0].val;
+	st_a->element[0].pos = st_b->element[0].pos;
 	while (i < st_b->len)
 	{
 		st_b->element[i].val = st_b->element[i + 1].val;
+		st_b->element[i].pos = st_b->element[i + 1].pos;
 		i++;
 	}
 	st_b->len--;

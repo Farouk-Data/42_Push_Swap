@@ -33,49 +33,14 @@ int main(int argc, char **argv)
 		
 		if (A_is_sorted(stack_a, stack_a->size))
 		  	return (1);
-		push_to_b(stack_a, stack_b);
-		for (int i = 0; i < stack_a->len; i++)
-			printf("%d ", stack_a->element[i].val);
-		printf("\n");
-
-		swap_stack(stack_a, "sa\n");
-		for (int i = 0; i < stack_a->len; i++)
-			printf("%d ", stack_a->element[i].val);
-		printf("\n");
-
-		push_to_b(stack_a, stack_b);
-		for (int i = 0; i < stack_a->len; i++)
-			printf("%d ", stack_a->element[i].val);
-		printf("\n");
-
-		swap_stack(stack_a, "sa\n");
-		for (int i = 0; i < stack_a->len; i++)
-			printf("%d ", stack_a->element[i].val);
-		printf("\n");
-
-		rotate_stack(stack_a, "ra\n");
-		for (int i = 0; i < stack_a->len; i++)
-			printf("%d ", stack_a->element[i].val);
-		printf("\n");
-
-		push_to_a(stack_a, stack_b);
-		for (int i = 0; i < stack_a->len; i++)
-			printf("%d ", stack_a->element[i].val);
-		printf("\n");
-		
-		push_to_a(stack_a, stack_b);
-		for (int i = 0; i < stack_a->len; i++)
-			printf("%d ", stack_a->element[i].val);
-		printf("\n");
-
-		// else if (stack_a->size == 3)
-		//  	sort_three_numbers(stack_a);
-		// else if (stack_a->size >= 4 && stack_a->size <= 10)
-		// 	sort_small_algo(stack_a, stack_b);
-		// else if (stack_a->size >= 11 && stack_a->size <= 100)
-		// 	sort_big_algo1(stack_a, stack_b);
-		// else if (stack_a->size > 100 && stack_a->size <= 500)
-		// 	sort_big_algo2(stack_a, stack_b);
+		else if (stack_a->size == 3)
+		 	sort_three_numbers(stack_a);
+		else if (stack_a->size >= 4 && stack_a->size <= 10)
+			sort_small_algo(stack_a, stack_b);
+		else if (stack_a->size >= 11 && stack_a->size <= 100)
+			sort_big_algo1(stack_a, stack_b);
+		else if (stack_a->size > 100 && stack_a->size <= 500)
+			sort_big_algo2(stack_a, stack_b);
 		// for (int i = 0; i < stack_a->size; i++)
 		// 	printf("%d ", stack_a->element[i].val);
 		// printf("\n");

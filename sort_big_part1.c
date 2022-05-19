@@ -1,175 +1,165 @@
-// #include "push_swap.h"
+#include "push_swap.h"
 
-// //modify
-// int find_max(t_stack *st)
-// {
-// 	int	i;
-// 	int	max;
-// 	int	pos;
+int find_max(t_stack *stack)
+{
+	int	i;
+	int	max;
+	int	pos;
 
-// 	i = st->id;
-// 	pos = 0;
-// 	max = st->arr[i];
-// 	while (i < st->size)
-// 	{
-// 		if (max < st->arr[i])
-// 		{
-// 			max = st->arr[i];
-// 			pos = i;
-// 		}
-// 		i++;
-// 	}
-// 	return (pos);
-// }
+	i = 0;
+	pos = 0;
+	max = stack->element[0].val;
+	while (i < stack->len)
+	{
+		if (max < stack->element[i].val)
+		{
+			max = stack->element[i].val;
+			pos = i;
+		}
+		i++;
+	}
+	return (pos);
+}
 
-// void	bubble_sort(int *arr, int size)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	swapped;
+void	bubble_sort(t_stack *stack)
+{
+	int	i;
+	int	j;
+	int	swapped;
 
-// 	i = 0;
-// 	while (i < size - 1)
-// 	{
-// 		j = 0;
-// 		swapped = FALSE;
-// 		while (j < size - i - 1)
-// 		{
-// 			if (arr[j] > arr[j + 1])
-// 			{
-// 				ft_swap(&arr[j], &arr[j + 1]);
-// 				swapped = TRUE;
-// 			}
-// 			j++;
-// 		}
-// 		if (swapped == FALSE)
-// 			break ;
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (i < stack->size - 1)
+	{
+		j = 0;
+		swapped = FALSE;
+		while (j < stack->size - i - 1)
+		{
+			if (stack->element[j].val > stack->element[j + 1].val)
+			{
+				ft_swap(&stack->element[j].val, &stack->element[j + 1].val);
+				swapped = TRUE;
+			}
+			j++;
+		}
+		if (swapped == FALSE)
+			break ;
+		i++;
+	}
+}
 
-// void	copy_stack(t_stack *st_a, t_stack *st_tmp)
-// {
-// 	int	i;
+void	copy_stack(t_stack *st_a, t_stack *st_tmp)
+{
+	int	i;
 	
-// 	i = 0;
-// 	while (i < st_a->size)
-// 	{
-// 		st_tmp->arr[i] = st_a->arr[i];
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (i < st_a->size)
+	{
+		st_tmp->element[i].val = st_a->element[i].val;
+		i++;
+	}
+}
 
-// void	index_stack(t_stack *st_a)
-// {
-// 	int		i;
-// 	int		j;
-// 	t_stack	*st_tmp;
+void	index_stack(t_stack *st_a)
+{
+	int		i;
+	int		j;
+	t_stack	*st_tmp;
 
-// 	st_tmp = (t_stack *)malloc(sizeof(t_stack));
-// 	st_tmp->arr = (int *)malloc(sizeof(int) * st_a->size);
-// 	st_a->index = (int *)malloc(sizeof(int) * st_a->size);
-// 	copy_stack(st_a, st_tmp);
-// 	bubble_sort(st_tmp->arr, st_a->size);
-// 	i = 0;
-// 	while (i < st_a->size)
-// 	{
-// 		j = 0;
-// 		while (j < st_a->size)
-// 		{
-// 			if (st_a->arr[i] == st_tmp->arr[j])
-// 				st_a->index[i] = j;
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	//free tmp
-// }
+	st_tmp = (t_stack *)malloc(sizeof(t_stack));
+	st_tmp->element = (t_node *)malloc(sizeof(t_node)*st_a->size);
+	st_tmp->size = st_a->size;
+	copy_stack(st_a, st_tmp);
+	bubble_sort(st_tmp);
+	i = 0;
+	while (i < st_a->size)
+	{
+		j = 0;
+		while (j < st_a->size)
+		{
+			if (st_a->element[i].val == st_tmp->element[j].val)
+				st_a->element[i].pos = j;
+			j++;
+		}
+		i++;
+	}
+	
+}
 
-// int	find_number(t_stack *st_a, int hold, int index)
-// {
-// 	int	i;
-// 	int	check;
+int	find_number(t_stack *st_a, int chunk)
+{
+	int	i;
+	int	check;
 
-// 	i = index;
-// 	while (i < st_a->size)
-// 	{
-// 		if (st_a->index[i] < hold)
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-// void	get_chunk(t_stack *st_a, t_stack *st_b, int hold)
-// {
-// 	while (find_number(st_a, hold, st_a->id))
-// 	{
-// 		if (st_a->index[st_a->id] < hold)
-// 		{
-// 			push_to_b(st_a, st_b);
-// 			if (st_a->index[st_a->id - 1] < (hold - ((st_a->size/2) / 5)))
-// 			{
-// 				if (st_a->index[st_a->id] > hold)
-// 					rr_op(st_a, st_b);
-// 				else 
-// 					rotate_stack(st_b, "rb\n");
-// 			}
-// 		}
-// 		else
-// 			rotate_stack(st_a, "ra\n");
-// 	}
-// }
+	i = 0;
+	while (i < st_a->len)
+	{
+		if (st_a->element[i].pos < chunk)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
-// // void	sort_stack_b(int *arr, int size)
-// // {
-// // 	int	i;
-// // 	int	max_pos;
-// // }
+void	get_chunk(t_stack *st_a, t_stack *st_b, int chunk)
+{
+	while (find_number(st_a, chunk))
+	{
+		if (st_a->element[0].pos < chunk)
+		{
+			push_to_b(st_a, st_b);
+			if (st_b->element[0].pos < (chunk - ((st_a->size/2) / 5)))
+			{
+				if (st_a->element[0].pos > chunk)
+					rr_op(st_a, st_b);
+				else 
+					rotate_stack(st_b, "rb\n");
+			}
+		}
+		else
+			rotate_stack(st_a, "ra\n");
+	}
+}
 
-// void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
-// {
-// 	int	i;
-// 	int	max;
-// 	int	hold;
+void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
+{
+	int	i;
+	int	max;
+	int	chunk;
 
-// 	index_stack(st_a);
-// 	hold = st_a->size / 5;
-// 	//printf("id a before: %d \nid b before: %d\n",st_a->id ,st_b->id);
-// 	while (hold <= st_a->size)
-// 	{
-// 		get_chunk(st_a, st_b, hold);
-// 		hold += st_a->size/5;
-// 	}
-// 	//printf("id a before: %d \nid b before: %d\n",st_a->id ,st_b->id);
-// 	while (st_b->id < st_b->size)
-// 	{
-// 		max = find_max(st_b);
-// 		if (max == st_b->id)
-// 			push_to_a(st_a, st_b);
-// 		else if (max == st_b->id + 1)
-// 		{
-// 			swap_stack(st_b, "sb\n");
-// 			push_to_a(st_a, st_b);
-// 		}
-// 		else if (max >= st_b->size / 2)
-// 		{
-// 			while (max != 0)
-// 			{
-// 				reverse_rotate_stack(st_b, "rrb\n");
-// 				max = find_max(st_b);
-// 			}
-// 			push_to_a(st_a, st_b);
-// 		}
-// 		//max = find_max(st_b);
-// 		else if (max < st_b->size / 2)
-// 		{
-// 			while (max != 0)
-// 			{
-// 				rotate_stack(st_b, "rb\n");
-// 				max = find_max(st_b);
-// 			}
-// 			push_to_a(st_a, st_b);
-// 		}
-// 	}
-// 	//printf("id a after: %d \nid b after: %d\n",st_a->id,st_b->id);
-// }
+	index_stack(st_a);
+	chunk = st_a->size / 5;
+	while (chunk <= st_a->size)
+	{
+		get_chunk(st_a, st_b, chunk);
+		chunk += st_a->size/5;
+	}
+	while (st_b->len)
+	{
+		max = find_max(st_b);
+		if (max == 0)
+			push_to_a(st_a, st_b);
+		else if (max == 1)
+		{
+			swap_stack(st_b, "sb\n");
+			push_to_a(st_a, st_b);
+		}
+		else if (max >= st_b->len / 2)
+		{
+			while (max != 0)
+			{
+				reverse_rotate_stack(st_b, "rrb\n");
+				max = find_max(st_b);
+			}
+			push_to_a(st_a, st_b);
+		}
+		else if (max < st_b->len / 2)
+		{
+			while (max != 0)
+			{
+				rotate_stack(st_b, "rb\n");
+				max = find_max(st_b);
+			}
+			push_to_a(st_a, st_b);
+		}
+	}
+}
