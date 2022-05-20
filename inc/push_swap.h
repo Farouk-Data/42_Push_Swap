@@ -1,12 +1,11 @@
-#ifndef CHECKER_BONUS_H
-# define CHECKER_BONUS_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
 #include <limits.h>
-# include <fcntl.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -30,10 +29,15 @@ typedef struct s_stack
 	int		len;
 }	t_stack;
 
-void	ft_bzero(t_stack *stack);
+void	bubble_sort(t_stack *stack);
 void	ft_print_error(void);
-int		ft_strcmp(char *s1, char *s2);
-void	execute_instruct(char *str, t_stack *stack_a, t_stack *stack_b);
+int		find_max(t_stack *stack);
+void	copy_stack(t_stack *st_a, t_stack *st_tmp);
+void	index_stack(t_stack *st_a);
+int		find_number(t_stack *st_a, int chunk);
+void	get_chunk(t_stack *st_a, t_stack *st_b, int chunk);
+void	get_chunk2(t_stack *st_a, t_stack *st_b, int chunk);
+void	ft_bzero(t_stack *stack);
 void	ft_print(char *str);
 int		ft_printf(const char *, ...);
 int		ft_putchar(char c);
@@ -55,21 +59,19 @@ char	*ft_strdup(const char *s);
 int		check_dup(t_stack *stack);
 int		check_empty(char *str);
 void	ft_swap(int *a, int *b);
-void	swap_stack(t_stack *st);
+void	swap_stack(t_stack *st, char *str);
 void	ss_op(t_stack *st_a, t_stack *st_b);
-void	rotate_stack(t_stack *st);
+void	rotate_stack(t_stack *st, char *str);
 void	rr_op(t_stack *st_a, t_stack *st_b);
-void	reverse_rotate_stack(t_stack *st);
+void	reverse_rotate_stack(t_stack *st, char *str);
 void	rrr_op(t_stack *st_a, t_stack *st_b);
 void	push_to_b(t_stack *st_a, t_stack *st_b);
 void	push_to_a(t_stack *st_a, t_stack *st_b);
+int		find_min(t_stack *stack);
 int		A_is_sorted(t_stack *stack, int size);
-char	*ft_read_all(char *str, int fd);
-char	*ft_free(char *str1, char *str2);
-char	*ft_getline(char *str, int *i);
-char	*ft_getrest(char *reminder, int *i);
-char	*get_next_line(int fd);
-int		ft_strchr(char *str, int c);
-
+void	sort_three_numbers(t_stack *stack);
+void	sort_small_algo(t_stack *st_a, t_stack *st_b);
+void	sort_big_algo1(t_stack *st_a, t_stack *st_b);
+void	sort_big_algo2(t_stack *st_a, t_stack *st_b);
 
 #endif

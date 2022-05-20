@@ -1,5 +1,10 @@
 #include "checker_bonus.h"
 
+void	ft_print_output(char *str)
+{
+	write(1, str, 3);
+}
+
 int main(int argc, char **argv)
 {
 	int		count;
@@ -7,13 +12,14 @@ int main(int argc, char **argv)
 	t_stack	*stack_b;
 	char	*instruct;
 	char	**args;
+	int	check;
 
 	if (argc > 1)
 	{
 		count = 0; 
 		if ((args = read_args(argc, argv, &count)) == NULL)
 		{
-			ft_printf("Error\n");
+			ft_print_error();
 			return (0);
 		}
 		stack_a = (t_stack *)malloc(sizeof(t_stack));
@@ -28,13 +34,14 @@ int main(int argc, char **argv)
 		convert_args(args, stack_a);
 		if (check_dup(stack_a))
 		{
-			ft_printf("Error\n");
+			ft_print_error();
 			return (0);
 		}
+		check = 1;
 		instruct = get_next_line(0);
-		while (instruct)
+		while (instruct && check)
 		{
-			execute_instruct(instruct, stack_a, stack_b);
+			check = execute_instruct(instruct, stack_a, stack_b);
 			instruct = get_next_line(0);
 		}
 		//check_stacks

@@ -88,7 +88,6 @@ void	index_stack(t_stack *st_a)
 int	find_number(t_stack *st_a, int chunk)
 {
 	int	i;
-	int	check;
 
 	i = 0;
 	while (i < st_a->len)
@@ -122,7 +121,6 @@ void	get_chunk(t_stack *st_a, t_stack *st_b, int chunk)
 
 void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 {
-	int	i;
 	int	max;
 	int	chunk;
 

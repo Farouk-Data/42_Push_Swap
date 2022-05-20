@@ -24,7 +24,6 @@ void	get_chunk2(t_stack *st_a, t_stack *st_b, int chunk)
 
 void	sort_big_algo2(t_stack *st_a, t_stack *st_b)
 {
-	int	i;
 	int	max;
 	int	chunk;
 

@@ -1,0 +1,8 @@
+a.out
+.DS*
+*/.DS*
+push_swap
+checker
+*.o
+*.a
+*.dSYM
