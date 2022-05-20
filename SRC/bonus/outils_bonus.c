@@ -39,6 +39,10 @@ int	execute_instruct(char *str, t_stack *stack_a, t_stack *stack_b)
 		reverse_rotate_stack(stack_b);
 	else if (ft_strcmp(str,"rrr\n") == 0)
 		rrr_op(stack_a, stack_b);
+	else if (ft_strcmp(str,"pb\n") == 0)
+		push_to_b(stack_a, stack_b);
+	else if (ft_strcmp(str,"pa\n") == 0)
+		push_to_a(stack_a, stack_b);
 	else
 	{
 		check = 0 ;

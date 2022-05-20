@@ -7,10 +7,8 @@ void	get_chunk2(t_stack *st_a, t_stack *st_b, int chunk)
 		if (st_a->element[0].pos < chunk)
 		{
 			push_to_b(st_a, st_b);
-			printf("pos = %d here\n", st_b->element[0].pos);
 			if (st_b->element[0].pos < (chunk - ((st_a->size/2) / 10)))
 			{
-				printf("pos = %d was here\n", st_a->element[0].pos);
 				if (st_a->element[0].pos > chunk)
 					rr_op(st_a, st_b);
 				else 

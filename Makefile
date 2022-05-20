@@ -69,7 +69,7 @@ clean :
 
 fclean : clean
 	@echo "\033[30;1m---> \033[0mBinary files clean\033[32;1m [DONE] \033[0m"
-	rm $(NAME) 
+	rm $(NAME_B) 
 
 re : fclean all
 

@@ -41,9 +41,12 @@ int main(int argc, char **argv)
 		instruct = get_next_line(0);
 		while (instruct && check)
 		{
-			check = execute_instruct(instruct, stack_a, stack_b);
+			if (!(check = execute_instruct(instruct, stack_a, stack_b)))
+				break;
 			instruct = get_next_line(0);
 		}
-		//check_stacks
+		if (check == 0)
+			exit(1) ;
+		check_stack(stack_a, stack_b);
 	}
 }

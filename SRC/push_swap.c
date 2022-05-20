@@ -1,5 +1,13 @@
 #include "push_swap.h"
 
+void	ft_free_stack(t_stack *stack_a, t_stack *stack_b)
+{
+	free(stack_a->element);
+	free(stack_a);
+	free(stack_b->element);
+	free(stack_b->element);
+}
+
 void	ft_print_error(void)
 {
 	write(2, "Error\n", 6);

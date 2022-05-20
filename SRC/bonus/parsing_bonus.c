@@ -76,7 +76,7 @@ char	**read_args(int argc, char **argv, int *count)
 	i = 0;
 	while (arr_arg[i] != NULL)
 	{
-		if (ft_atoi(arr_arg[i]) >= INT_MAX || ft_atoi(arr_arg[i]) <= INT_MIN)
+		if (ft_atoi(arr_arg[i]) > INT_MAX || ft_atoi(arr_arg[i]) < INT_MIN)
 			return (NULL);
 		if (ft_atoi(arr_arg[i]) == 0 && check_arg(arr_arg[i]) == 0)
 			return (NULL);

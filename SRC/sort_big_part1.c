@@ -82,7 +82,6 @@ void	index_stack(t_stack *st_a)
 		}
 		i++;
 	}
-	
 }
 
 int	find_number(t_stack *st_a, int chunk)
