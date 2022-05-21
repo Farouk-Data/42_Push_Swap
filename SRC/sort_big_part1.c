@@ -118,9 +118,41 @@ void	get_chunk(t_stack *st_a, t_stack *st_b, int chunk)
 	}
 }
 
-void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
+void swap_push(t_stack *st_a, t_stack *st_b)
+{
+	swap_stack(st_b, "sb\n");
+	push_to_a(st_a, st_b);
+}
+
+void	sort_b(t_stack *st_a, t_stack *st_b)
 {
 	int	max;
+
+	while (st_b->len)
+	{
+		max = find_max(st_b);
+		if (max == 0)
+			push_to_a(st_a, st_b);
+		else if (max == 1)
+			swap_push(st_a, st_b);
+		else
+		{
+			while (max != 0)
+			{
+				if (max >= st_b->len / 2)
+					reverse_rotate_stack(st_b, "rrb\n");
+				else if (max < st_b->len / 2)
+					rotate_stack(st_b, "rb\n");
+				if (max >= st_b->len / 2 || max < st_b->len / 2)
+					max = find_max(st_b);
+			}
+			push_to_a(st_a, st_b);
+		}
+	}
+}
+
+void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
+{
 	int	chunk;
 
 	index_stack(st_a);
@@ -130,33 +162,5 @@ void	sort_big_algo1(t_stack *st_a, t_stack *st_b)
 		get_chunk(st_a, st_b, chunk);
 		chunk += st_a->size/5;
 	}
-	while (st_b->len)
-	{
-		max = find_max(st_b);
-		if (max == 0)
-			push_to_a(st_a, st_b);
-		else if (max == 1)
-		{
-			swap_stack(st_b, "sb\n");
-			push_to_a(st_a, st_b);
-		}
-		else if (max >= st_b->len / 2)
-		{
-			while (max != 0)
-			{
-				reverse_rotate_stack(st_b, "rrb\n");
-				max = find_max(st_b);
-			}
-			push_to_a(st_a, st_b);
-		}
-		else if (max < st_b->len / 2)
-		{
-			while (max != 0)
-			{
-				rotate_stack(st_b, "rb\n");
-				max = find_max(st_b);
-			}
-			push_to_a(st_a, st_b);
-		}
-	}
+	sort_b(st_a, st_b);
 }

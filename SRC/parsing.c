@@ -38,7 +38,7 @@ int	check_empty(char *str)
 		i++;
 	}
 	return (0);
-}
+}	
 
 int	check_arg(char *str)
 {
@@ -52,6 +52,23 @@ int	check_arg(char *str)
 			return (0);
 	}
 	return (1);
+}
+
+char	**count_check(char	**arr_arg, int *count)
+{
+	int	i;
+
+	i = 0;
+	while (arr_arg[i] != NULL)
+	{
+		if (ft_atoi(arr_arg[i]) > INT_MAX || ft_atoi(arr_arg[i]) < INT_MIN)
+			return (NULL);
+		if (ft_atoi(arr_arg[i]) == 0 && check_arg(arr_arg[i]) == 0)
+			return (NULL);
+		*count = *count + 1;
+		i++;
+	}
+	return (arr_arg);
 }
 
 char	**read_args(int argc, char **argv, int *count)
@@ -73,22 +90,7 @@ char	**read_args(int argc, char **argv, int *count)
 	}
 	arr_arg = ft_split(args, ' ');
 	free(args);
-	i = 0;
-	while (arr_arg[i] != NULL)
-	{
-		if (ft_atoi(arr_arg[i]) > INT_MAX || ft_atoi(arr_arg[i]) < INT_MIN)
-			return (NULL);
-		if (ft_atoi(arr_arg[i]) == 0 && check_arg(arr_arg[i]) == 0)
-			return (NULL);
-		i++;
-	}
-	i = 0;
-	while (arr_arg[i] != NULL)
-	{
-		*count = *count + 1;
-		i++;
-	}
-	return (arr_arg);
+	return (count_check(arr_arg, count));
 }
 
 void	convert_args(char **args, t_stack *stack)

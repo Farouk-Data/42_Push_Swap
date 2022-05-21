@@ -73,5 +73,7 @@ void	sort_three_numbers(t_stack *stack);
 void	sort_small_algo(t_stack *st_a, t_stack *st_b);
 void	sort_big_algo1(t_stack *st_a, t_stack *st_b);
 void	sort_big_algo2(t_stack *st_a, t_stack *st_b);
+void	sort_b(t_stack *st_a, t_stack *st_b);
+void	swap_push(t_stack *st_a, t_stack *st_b);
 
 #endif
