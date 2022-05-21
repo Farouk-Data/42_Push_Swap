@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fech-cha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/21 22:37:46 by fech-cha          #+#    #+#             */
+/*   Updated: 2022/05/21 22:37:49 by fech-cha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "push_swap.h"
 
 int	ft_strchr(char *str, int c)
@@ -83,7 +94,10 @@ char	**read_args(int argc, char **argv, int *count)
 	while (i < argc)
 	{
 		if (!check_empty(argv[i]))
+		{
+			free(args);
 			return (arr_arg);
+		}
 		args = ft_strjoin(args, argv[i]);
 		args = ft_strjoin(args, " ");
 		i++;
@@ -97,17 +111,21 @@ void	convert_args(char **args, t_stack *stack)
 {
 	int	i;
 
-	i = 0;
-	
 	if (stack == NULL)
 		return ;
-	stack->len = stack->size;
 	i = 0;
 	while (args[i] != NULL)
 	{
 		stack->element[i].val = ft_atoi(args[i]);
 		i++;
 	}
+	i = 0;
+	while (args[i] != NULL)
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
 }
 
 int check_dup(t_stack *stack)

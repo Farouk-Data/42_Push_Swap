@@ -1,4 +1,15 @@
-#include "checker_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fech-cha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/21 22:39:36 by fech-cha          #+#    #+#             */
+/*   Updated: 2022/05/21 22:39:42 by fech-cha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#include "push_swap.h"
 
 int	ft_strchr(char *str, int c)
 {
@@ -38,7 +49,7 @@ int	check_empty(char *str)
 		i++;
 	}
 	return (0);
-}
+}	
 
 int	check_arg(char *str)
 {
@@ -54,6 +65,23 @@ int	check_arg(char *str)
 	return (1);
 }
 
+char	**count_check(char	**arr_arg, int *count)
+{
+	int	i;
+
+	i = 0;
+	while (arr_arg[i] != NULL)
+	{
+		if (ft_atoi(arr_arg[i]) > INT_MAX || ft_atoi(arr_arg[i]) < INT_MIN)
+			return (NULL);
+		if (ft_atoi(arr_arg[i]) == 0 && check_arg(arr_arg[i]) == 0)
+			return (NULL);
+		*count = *count + 1;
+		i++;
+	}
+	return (arr_arg);
+}
+
 char	**read_args(int argc, char **argv, int *count)
 {
 	int		i;
@@ -66,46 +94,38 @@ char	**read_args(int argc, char **argv, int *count)
 	while (i < argc)
 	{
 		if (!check_empty(argv[i]))
+		{
+			free(args);
 			return (arr_arg);
+		}
 		args = ft_strjoin(args, argv[i]);
 		args = ft_strjoin(args, " ");
 		i++;
 	}
 	arr_arg = ft_split(args, ' ');
 	free(args);
-	i = 0;
-	while (arr_arg[i] != NULL)
-	{
-		if (ft_atoi(arr_arg[i]) > INT_MAX || ft_atoi(arr_arg[i]) < INT_MIN)
-			return (NULL);
-		if (ft_atoi(arr_arg[i]) == 0 && check_arg(arr_arg[i]) == 0)
-			return (NULL);
-		i++;
-	}
-	i = 0;
-	while (arr_arg[i] != NULL)
-	{
-		*count = *count + 1;
-		i++;
-	}
-	return (arr_arg);
+	return (count_check(arr_arg, count));
 }
 
 void	convert_args(char **args, t_stack *stack)
 {
 	int	i;
 
-	i = 0;
-	
 	if (stack == NULL)
 		return ;
-	stack->len = stack->size;
 	i = 0;
 	while (args[i] != NULL)
 	{
 		stack->element[i].val = ft_atoi(args[i]);
 		i++;
 	}
+	i = 0;
+	while (args[i] != NULL)
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
 }
 
 int check_dup(t_stack *stack)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fech-cha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/21 22:45:54 by fech-cha          #+#    #+#             */
+/*   Updated: 2022/05/21 22:46:12 by fech-cha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -21,7 +33,6 @@ typedef struct s_node
 	int	pos;
 }	t_node;
 
-
 typedef struct s_stack
 {
 	t_node	*element;
@@ -29,6 +40,7 @@ typedef struct s_stack
 	int		len;
 }	t_stack;
 
+void	free_double(t_stack *stack_a, t_stack *stack_b);
 void	bubble_sort(t_stack *stack);
 void	ft_print_error(void);
 int		find_max(t_stack *stack);
@@ -75,5 +87,4 @@ void	sort_big_algo1(t_stack *st_a, t_stack *st_b);
 void	sort_big_algo2(t_stack *st_a, t_stack *st_b);
 void	sort_b(t_stack *st_a, t_stack *st_b);
 void	swap_push(t_stack *st_a, t_stack *st_b);
-
 #endif

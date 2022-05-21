@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fech-cha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/21 22:37:46 by fech-cha          #+#    #+#             */
+/*   Updated: 2022/05/21 22:37:49 by fech-cha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ft_print_error(void)
@@ -5,17 +17,27 @@ void	ft_print_error(void)
 	write(2, "Error\n", 6);
 }
 
-int init(char *args[], t_stack *stack_a, t_stack *stack_b)
+void	free_double(t_stack *stack_a, t_stack *stack_b)
+{
+	free(stack_a->element);
+	free(stack_b->element);
+}
+
+int push_swap(char *args[], t_stack *stack_a, t_stack *stack_b)
 {
 	ft_bzero(stack_b);
 	convert_args(args, stack_a);
 	if (check_dup(stack_a))
 	{
+		free_double(stack_a, stack_b);
 		ft_print_error();
 		return (0);
 	}
 	if (A_is_sorted(stack_a, stack_a->size))
-		return (1);
+	{
+		free_double(stack_a, stack_b);
+		return (0);
+	}
 	else if (stack_a->size == 3)
 		sort_three_numbers(stack_a);
 	else if (stack_a->size >= 4 && stack_a->size <= 10)
@@ -46,11 +68,10 @@ int main(int argc, char *argv[])
 		stack_b.size = count;
 		stack_b.len = 0;
 		if (stack_a.element == NULL || stack_b.element == NULL)
-		{
-			free(stack_a.element);
-			free(stack_b.element);
-		}
-		return (init(args, &stack_a, &stack_b));
+			free_double(&stack_a, &stack_b);
+		push_swap(args, &stack_a, &stack_b);
+		free_double(&stack_a, &stack_b);
+		return (0);
 	}
-	return (1);
+	return (0);
 }
