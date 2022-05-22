@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fech-cha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 22:37:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/05/22 21:52:13 by fech-cha         ###   ########.fr       */
+/*   Created: 2022/05/21 22:39:36 by fech-cha          #+#    #+#             */
+/*   Updated: 2022/05/22 16:37:08 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	ft_print(char *str)
-{
-	while (*str)
-	{
-		ft_putchar(*str);
-		str++;
-	}
-}
 
 void	ft_swap(int *a, int *b)
 {
@@ -30,11 +21,10 @@ void	ft_swap(int *a, int *b)
 	*b = tmp;
 }
 
-void	swap_stack(t_stack *st, char *str)
+void	swap_stack(t_stack *st)
 {
 	ft_swap(&(st->element[0].val), &(st->element[1].val));
 	ft_swap(&(st->element[0].pos), &(st->element[1].pos));
-	ft_print(str);
 }
 
 void	ss_op(t_stack *st_a, t_stack *st_b)
@@ -43,10 +33,9 @@ void	ss_op(t_stack *st_a, t_stack *st_b)
 	ft_swap(&(st_a->element[0].pos), &(st_a->element[1].pos));
 	ft_swap(&(st_b->element[0].val), &(st_b->element[1].val));
 	ft_swap(&(st_b->element[0].pos), &(st_b->element[1].pos));
-	ft_printf("ss\n");
 }
 
-void	rotate_stack(t_stack *st, char *str)
+void	rotate_stack(t_stack *st)
 {
 	int	i;
 
@@ -57,6 +46,10 @@ void	rotate_stack(t_stack *st, char *str)
 		ft_swap(&(st->element[i].pos), &(st->element[i + 1].pos));
 		i++;
 	}
-	if (str != NULL)
-		ft_print(str);
+}
+
+void	rr_op(t_stack *st_a, t_stack *st_b)
+{
+	rotate_stack(st_a);
+	rotate_stack(st_b);
 }

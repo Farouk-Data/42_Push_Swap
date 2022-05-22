@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fech-cha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 22:39:36 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/05/22 16:24:14 by fech-cha         ###   ########.fr       */
+/*   Created: 2022/05/21 22:37:46 by fech-cha          #+#    #+#             */
+/*   Updated: 2022/05/22 21:52:59 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "push_swap.h"
 
-void	reverse_rotate_stack(t_stack *st)
+void	rr_op(t_stack *st_a, t_stack *st_b)
+{
+	rotate_stack(st_a, NULL);
+	rotate_stack(st_b, NULL);
+	ft_printf("rr\n");
+}
+
+void	reverse_rotate_stack(t_stack *st, char *str)
 {
 	int	i;
 
@@ -23,12 +30,15 @@ void	reverse_rotate_stack(t_stack *st)
 		ft_swap(&(st->element[i].pos), &(st->element[i - 1].pos));
 		i--;
 	}
+	if (str != NULL)
+		ft_print(str);
 }
 
 void	rrr_op(t_stack *st_a, t_stack *st_b)
 {
-	reverse_rotate_stack(st_a);
-	reverse_rotate_stack(st_b);
+	reverse_rotate_stack(st_a, NULL);
+	reverse_rotate_stack(st_b, NULL);
+	ft_printf("rrr\n");
 }
 
 void	push_to_b(t_stack *st_a, t_stack *st_b)
@@ -52,6 +62,7 @@ void	push_to_b(t_stack *st_a, t_stack *st_b)
 	}
 	st_a->len--;
 	st_b->len++;
+	ft_printf("pb\n");
 }
 
 void	push_to_a(t_stack *st_a, t_stack *st_b)
@@ -75,4 +86,5 @@ void	push_to_a(t_stack *st_a, t_stack *st_b)
 	}
 	st_b->len--;
 	st_a->len++;
+	ft_printf("pa\n");
 }

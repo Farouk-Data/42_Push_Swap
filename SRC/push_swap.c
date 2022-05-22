@@ -6,7 +6,7 @@
 /*   By: fech-cha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 22:37:46 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/05/21 22:37:49 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/05/22 22:09:26 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_double(t_stack *stack_a, t_stack *stack_b)
 	free(stack_b->element);
 }
 
-int push_swap(char *args[], t_stack *stack_a, t_stack *stack_b)
+int	push_swap(char *args[], t_stack *stack_a, t_stack *stack_b)
 {
 	ft_bzero(stack_b);
 	convert_args(args, stack_a);
@@ -33,7 +33,7 @@ int push_swap(char *args[], t_stack *stack_a, t_stack *stack_b)
 		ft_print_error();
 		return (0);
 	}
-	if (A_is_sorted(stack_a, stack_a->size))
+	if (a_is_sorted(stack_a, stack_a->size))
 	{
 		free_double(stack_a, stack_b);
 		return (0);
@@ -46,10 +46,10 @@ int push_swap(char *args[], t_stack *stack_a, t_stack *stack_b)
 		sort_big_algo1(stack_a, stack_b);
 	else if (stack_a->size > 100 && stack_a->size <= 500)
 		sort_big_algo2(stack_a, stack_b);
-	return (1); 
+	return (1);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	int		count;
 	char	**args;
@@ -58,10 +58,11 @@ int main(int argc, char *argv[])
 
 	if (argc > 1)
 	{
-		count = 0; 
-		if ((args = read_args(argc, argv, &count)) == NULL)
+		count = 0;
+		args = read_args(argc, argv, &count);
+		if (args == NULL)
 			return (ft_print_error(), 0);
-		stack_a.element= (t_node *)malloc(sizeof(t_node) * count);
+		stack_a.element = (t_node *)malloc(sizeof(t_node) * count);
 		stack_a.size = count;
 		stack_a.len = count;
 		stack_b.element = (t_node *)malloc(sizeof(t_node) * count);

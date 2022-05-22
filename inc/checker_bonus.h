@@ -67,7 +67,7 @@ void		reverse_rotate_stack(t_stack *st);
 void		rrr_op(t_stack *st_a, t_stack *st_b);
 void		push_to_b(t_stack *st_a, t_stack *st_b);
 void		push_to_a(t_stack *st_a, t_stack *st_b);
-int			A_is_sorted(t_stack *stack, int size);
+int			a_is_sorted(t_stack *stack, int size);
 char		*ft_read_all(char *str, int fd);
 char		*ft_free(char *str1, char *str2);
 char		*ft_getline(char *str, int *i);

@@ -17,7 +17,10 @@ FILES = ft_atoi.o	\
 	ft_strlcpy.o \
 	ft_strlen.o \
 	parsing.o \
+	parsing2.o \
 	operations.o \
+	operations2.o \
+	sort_utils.o \
 	sort_big_part1.o \
 	sort_big_part2.o \
 	sorting.o
@@ -27,8 +30,10 @@ FILES_B = ft_atoi.o	\
 		ft_strdup.o  \
 		checker_bonus.o \
 		operations_bonus.o \
+		operations_bonus2.o \
 		outils_bonus.o \
 		parsing_bonus.o \
+		parsing_bonus2.o \
 		get_next_line.o \
 		ft_strjoin.o \
 		ft_strlcat.o \

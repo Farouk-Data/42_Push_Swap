@@ -6,9 +6,10 @@
 /*   By: fech-cha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 22:39:36 by fech-cha          #+#    #+#             */
-/*   Updated: 2022/05/21 22:39:42 by fech-cha         ###   ########.fr       */
+/*   Updated: 2022/05/22 16:19:07 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "checker_bonus.h"
 
 long int	ft_atoi(const char *str)
