@@ -58,6 +58,7 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 char		*ft_strdup(const char *s);
 int			check_dup(t_stack *stack);
 int			check_empty(char *str);
+char		**count_check(char	**arr_arg, int *count);
 void		ft_swap(int *a, int *b);
 void		swap_stack(t_stack *st);
 void		ss_op(t_stack *st_a, t_stack *st_b);

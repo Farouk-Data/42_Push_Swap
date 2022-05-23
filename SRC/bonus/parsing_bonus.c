@@ -9,7 +9,8 @@
 /*   Updated: 2022/05/22 18:23:54 by fech-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+
+#include "checker_bonus.h"
 
 char	**read_args(int argc, char **argv, int *count)
 {

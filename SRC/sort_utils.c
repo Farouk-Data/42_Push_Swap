@@ -100,6 +100,8 @@ void	index_stack(t_stack *st_a)
 
 	st_tmp = (t_stack *)malloc(sizeof(t_stack));
 	st_tmp->element = (t_node *)malloc(sizeof(t_node) * st_a->size);
+	if (st_tmp->element == NULL || st_tmp == NULL)
+		return ;
 	st_tmp->size = st_a->size;
 	copy_stack(st_a, st_tmp);
 	bubble_sort(st_tmp);
@@ -115,4 +117,6 @@ void	index_stack(t_stack *st_a)
 		}
 		i++;
 	}
+	free(st_tmp->element);
+	free(st_tmp);
 }

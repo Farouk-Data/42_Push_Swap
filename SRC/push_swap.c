@@ -29,15 +29,11 @@ int	push_swap(char *args[], t_stack *stack_a, t_stack *stack_b)
 	convert_args(args, stack_a);
 	if (check_dup(stack_a))
 	{
-		free_double(stack_a, stack_b);
 		ft_print_error();
 		return (0);
 	}
 	if (a_is_sorted(stack_a, stack_a->size))
-	{
-		free_double(stack_a, stack_b);
 		return (0);
-	}
 	else if (stack_a->size == 3)
 		sort_three_numbers(stack_a);
 	else if (stack_a->size >= 4 && stack_a->size <= 10)
