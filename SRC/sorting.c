@@ -43,7 +43,10 @@ void	sort_three_numbers(t_stack *st)
 	a = st->element[0].val;
 	b = st->element[1].val;
 	c = st->element[2].val;
-	sub_args(st, a, b, c);
+	if (st->size == 2 && a > b)
+		swap_stack(st, "sa\n");
+	else
+		sub_args(st, a, b, c);
 }
 
 void	swap_push_b(t_stack *st_a, t_stack *st_b)

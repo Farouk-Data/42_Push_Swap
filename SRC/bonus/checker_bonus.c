@@ -37,6 +37,7 @@ int	checking(t_stack *stack_a, t_stack *stack_b, char **args)
 	while (instruct && check)
 	{
 		check = execute_instruct(instruct, stack_a, stack_b);
+		free(instruct);
 		if (!check)
 			break ;
 		instruct = get_next_line(0);

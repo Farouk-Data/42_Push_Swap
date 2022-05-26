@@ -34,10 +34,9 @@ char	**read_args(int argc, char **argv, int *count)
 	int		i;
 	char	*args;
 	char	**arr_arg;
+	char	*tmp;
 
-	i = 1;
-	args = NULL;
-	arr_arg = NULL;
+	init_param(&i, &args, &arr_arg);
 	while (i < argc)
 	{
 		if (!check_empty(argv[i]))
@@ -45,8 +44,12 @@ char	**read_args(int argc, char **argv, int *count)
 			free(args);
 			return (arr_arg);
 		}
-		args = ft_strjoin(args, argv[i]);
-		args = ft_strjoin(args, " ");
+		tmp = ft_strjoin(args, argv[i]);
+		free(args);
+		args = tmp;
+		tmp = ft_strjoin(args, " ");
+		free(args);
+		args = tmp;
 		i++;
 	}
 	arr_arg = ft_split(args, ' ');

@@ -65,3 +65,10 @@ int	check_arg(char *str)
 	}
 	return (1);
 }
+
+void	init_param(int *i, char **args, char ***arr_arg)
+{
+	*i = 1;
+	*args = NULL;
+	*arr_arg = NULL;
+}

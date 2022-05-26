@@ -34,7 +34,7 @@ int	push_swap(char *args[], t_stack *stack_a, t_stack *stack_b)
 	}
 	if (a_is_sorted(stack_a, stack_a->size))
 		return (0);
-	else if (stack_a->size == 3)
+	else if (stack_a->size <= 3)
 		sort_three_numbers(stack_a);
 	else if (stack_a->size >= 4 && stack_a->size <= 10)
 		sort_small_algo(stack_a, stack_b);

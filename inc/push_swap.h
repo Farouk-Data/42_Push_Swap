@@ -41,6 +41,7 @@ typedef struct s_stack
 }	t_stack;
 
 void		free_double(t_stack *stack_a, t_stack *stack_b);
+void		init_param(int *i, char **args, char ***arr_arg);
 int			check_arg(char *str);
 void		swap_push(t_stack *st_a, t_stack *st_b);
 void		bubble_sort(t_stack *stack);
